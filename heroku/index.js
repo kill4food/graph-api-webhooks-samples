@@ -35,7 +35,7 @@ app.get(['/facebook', '/instagram'], function(req, res) {
 
 app.post('/facebook', function(req, res) {
 
-console.log(req);
+console.log(JSON.stringify(req.body));
 
   if (req.isXHub) {
     console.log('request header X-Hub-Signature found, validating');

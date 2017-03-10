@@ -34,11 +34,8 @@ app.get(['/facebook', '/instagram'], function(req, res) {
 });
 
 app.post('/facebook', function(req, res) {
-var output = '';
-for (var property in req._readableState) {
-  output += property + ': ' + req._readableState[property]+'; ';
-}
-console.log(output);
+
+console.log(req.toSource());
 
   if (req.isXHub) {
     console.log('request header X-Hub-Signature found, validating');

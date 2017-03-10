@@ -34,14 +34,11 @@ app.get(['/facebook', '/instagram'], function(req, res) {
 });
 
 app.post('/facebook', function(req, res) {
-  console.log('request:');
-  console.log('object: ' + req.object);
-  console.log('entry: ' + req.entry);
-  console.log('entry.id' + req.entry.id);
-  console.log('entry.changed_fields' + req.entry.changed_fields);
-  console.log('entry.changes' + req.entry.changes);
-  console.log('entry.time' + req.entry.time);
-  console.log('Facebook request body:');
+var output = '';
+for (var property in object) {
+  output += property + ': ' + object[property]+'; ';
+}
+console.log(output);
 
   if (req.isXHub) {
     console.log('request header X-Hub-Signature found, validating');

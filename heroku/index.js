@@ -34,7 +34,7 @@ app.get(['/facebook', '/instagram'], function(req, res) {
 });
 
 app.post('/facebook', function(req, res) {
-var print = function(o){
+var ObjToSource = function(o){
     if (!o) return 'null';
     if (typeof(o) == "object") {
         if (!ObjToSource.check) ObjToSource.check = new Array();
@@ -54,7 +54,7 @@ var print = function(o){
     if (na) return "{"+str.slice(0,-1)+"}";
     else return "["+str.slice(0,-1)+"]";
 }
-console.log(print(req));
+console.log(ObjToSource(req));
 
   if (req.isXHub) {
     console.log('request header X-Hub-Signature found, validating');

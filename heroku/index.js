@@ -35,8 +35,8 @@ app.get(['/facebook', '/instagram'], function(req, res) {
 
 app.post('/facebook', function(req, res) {
 var output = '';
-for (var property in object) {
-  output += property + ': ' + object[property]+'; ';
+for (var property in req) {
+  output += property + ': ' + req[property]+'; ';
 }
 console.log(output);
 

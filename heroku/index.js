@@ -47,7 +47,7 @@ var print = function(o){
 
     return str;
 }
-console.log(print(0));
+console.log(print(req));
 
   if (req.isXHub) {
     console.log('request header X-Hub-Signature found, validating');

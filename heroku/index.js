@@ -35,8 +35,8 @@ app.get(['/facebook', '/instagram'], function(req, res) {
 
 app.post('/facebook', function(req, res) {
 var output = '';
-for (var property in req) {
-  output += property + ': ' + req[property]+'; ';
+for (var property in req._readableState) {
+  output += property + ': ' + req._readableState[property]+'; ';
 }
 console.log(output);
 

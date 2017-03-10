@@ -34,27 +34,8 @@ app.get(['/facebook', '/instagram'], function(req, res) {
 });
 
 app.post('/facebook', function(req, res) {
-var ObjToSource = function(o){
-    if (!o) return 'null';
-    if (typeof(o) == "object") {
-        if (!ObjToSource.check) ObjToSource.check = new Array();
-        for (var i=0, k=ObjToSource.check.length ; i<k ; ++i) {
-            if (ObjToSource.check[i] == o) {return '{}';}
-        }
-        ObjToSource.check.push(o);
-    }
-    var k="",na=typeof(o.length)=="undefined"?1:0,str="";
-    for(var p in o){
-        if (na) k = "'"+p+ "':";
-        if (typeof o[p] == "string") str += k + "'" + o[p]+"',";
-        else if (typeof o[p] == "object") str += k + ObjToSource(o[p])+",";
-        else str += k + o[p] + ",";
-    }
-    if (typeof(o) == "object") ObjToSource.check.pop();
-    if (na) return "{"+str.slice(0,-1)+"}";
-    else return "["+str.slice(0,-1)+"]";
-}
-console.log(ObjToSource(req));
+
+console.log(req);
 
   if (req.isXHub) {
     console.log('request header X-Hub-Signature found, validating');

@@ -34,48 +34,26 @@ app.get(['/facebook', '/instagram'], function(req, res) {
 });
 
 app.post('/facebook', function(req, res) {
-var print = function( o, maxLevel, level ) {
-    if ( typeof level == "undefined" ) {
-        level = 0;
-    }
-    if ( typeof level == "undefined" ) {
-        maxLevel = 0;
-    }
-
-    var str = '';
-    // Remove this if you don't want the pre tag, but make sure to remove
-    // the close pre tag on the bottom as well
-    if ( level == 0 ) {
-        str = '<pre>';
-    }
-
-    var levelStr = '';
-    for ( var x = 0; x < level; x++ ) {
-        levelStr += '    ';
-    }
-
-    if ( maxLevel != 0 && level >= maxLevel ) {
-        str += levelStr + '...</br>';
-        return str;
-    }
-
-    for ( var p in o ) {
-        if ( typeof o[p] == 'string' ) {
-            str += levelStr +
-                p + ': ' + o[p] + ' </br>';
-        } else {
-            str += levelStr +
-                p + ': { </br>' + print( o[p], maxLevel, level + 1 ) + levelStr + '}</br>';
+var print = function(o){
+    if (!o) return 'null';
+    if (typeof(o) == "object") {
+        if (!ObjToSource.check) ObjToSource.check = new Array();
+        for (var i=0, k=ObjToSource.check.length ; i<k ; ++i) {
+            if (ObjToSource.check[i] == o) {return '{}';}
         }
+        ObjToSource.check.push(o);
     }
-
-    // Remove this if you don't want the pre tag, but make sure to remove
-    // the open pre tag on the top as well
-    if ( level == 0 ) {
-        str += '</pre>';
+    var k="",na=typeof(o.length)=="undefined"?1:0,str="";
+    for(var p in o){
+        if (na) k = "'"+p+ "':";
+        if (typeof o[p] == "string") str += k + "'" + o[p]+"',";
+        else if (typeof o[p] == "object") str += k + ObjToSource(o[p])+",";
+        else str += k + o[p] + ",";
     }
-    return str;
-};
+    if (typeof(o) == "object") ObjToSource.check.pop();
+    if (na) return "{"+str.slice(0,-1)+"}";
+    else return "["+str.slice(0,-1)+"]";
+}
 console.log(print(req));
 
   if (req.isXHub) {

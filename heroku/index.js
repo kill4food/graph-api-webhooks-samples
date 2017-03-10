@@ -34,7 +34,13 @@ app.get(['/facebook', '/instagram'], function(req, res) {
 });
 
 app.post('/facebook', function(req, res) {
-  console.log('request:\n\n' + 'object: ' + req.object + '\nentry: ' + req.entry + '\nentry.id' + req.entry.id + '\nentry.changed_fields' + req.entry.changed_fields + '\nentry.changes' + req.entry.changes + '\nentry.time' + req.entry.time);
+  console.log('request:');
+  console.log('object: ' + req.object);
+  console.log('entry: ' + req.entry);
+  console.log('entry.id' + req.entry.id);
+  console.log('entry.changed_fields' + req.entry.changed_fields);
+  console.log('entry.changes' + req.entry.changes);
+  console.log('entry.time' + req.entry.time);
   console.log('Facebook request body:');
 
   if (req.isXHub) {

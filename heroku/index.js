@@ -35,15 +35,28 @@ app.get(['/facebook', '/instagram'], function(req, res) {
 
 app.post('/facebook', function(req, res) {
 
-console.log(JSON.stringify(req.body));
-
   if (req.isXHub) {
-    console.log('request header X-Hub-Signature found, validating');
     if (req.isXHubValid()) {
-      console.log('request header X-Hub-Signature validated');
-      //res.send('Verified!\n');
-    }
-  }
+      if(req.body.object == 'page') {
+        var entry = req.body.entry;
+        entry.forEach(function(userEntry) {
+          entry.changes.forEach(function(change) {
+            var value = change.value;
+            if(change.field == 'field' && value.item == 'like' && value.verb == 'add') {
+              console.log('The user ' + value.user_id + ' has liked the page ' + change.id);
+            } else {
+              console.log('there is not a like update');
+              console.log(JSON.stringify(req.body));
+            } // end of values check
+          });
+          var x = arrayItem.prop1 + 2;
+        });
+      } else {
+        console.log('this is not a page entry');
+        console.log(JSON.stringify(req.body));
+      } // end of page check
+    } // end of isXHubValid
+  } // end of isXHub
   else {
     console.log('Warning - request header X-Hub-Signature not present or invalid');
     res.send('Failed to verify!\n');

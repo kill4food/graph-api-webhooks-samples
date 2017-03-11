@@ -41,7 +41,7 @@ app.post('/facebook', function(req, res) {
           userEntry.changes.forEach(function(change) {
             var value = change.value;
             if(change.field == 'feed' && value.item == 'like' && value.verb == 'add') {
-              console.log('The user ' + value.user_id + ' has liked the page ' + change.id);
+              console.log('The user ' + value.user_id + ' has liked the page ' + userEntry.id);
             } else {
               console.log('this is not a like update');
               console.log(JSON.stringify(req.body));

@@ -22,7 +22,7 @@ app.get('/', function(req, res) {
   res.send('It works!');
 });
 
-app.get(['/facebook', '/instagram'], function(req, res) {
+app.get(['/facebook'], function(req, res) {
   if (
     req.param('hub.mode') == 'subscribe' &&
     req.param('hub.verify_token') == 'token'
@@ -34,13 +34,11 @@ app.get(['/facebook', '/instagram'], function(req, res) {
 });
 
 app.post('/facebook', function(req, res) {
-console.log(JSON.stringify(req.body));
   if (req.isXHub) {
     if (req.isXHubValid()) {
       if(req.body.object == 'page') {
-        var entry = req.body.entry;
-        entry.forEach(function(userEntry) {
-          entry.changes.forEach(function(change) {
+        req.body.entry.forEach(function(userEntry) {
+          userEntry.changes.forEach(function(change) {
             var value = change.value;
             if(change.field == 'field' && value.item == 'like' && value.verb == 'add') {
               console.log('The user ' + value.user_id + ' has liked the page ' + change.id);
@@ -49,7 +47,6 @@ console.log(JSON.stringify(req.body));
               console.log(JSON.stringify(req.body));
             } // end of values check
           });
-          var x = arrayItem.prop1 + 2;
         });
       } else {
         console.log('this is not a page entry');

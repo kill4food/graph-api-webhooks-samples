@@ -41,7 +41,7 @@ console.log(JSON.stringify(req.body));
     console.log('request header X-Hub-Signature found, validating');
     if (req.isXHubValid()) {
       console.log('request header X-Hub-Signature validated');
-      res.send('Verified!\n');
+      //res.send('Verified!\n');
     }
   }
   else {
@@ -50,16 +50,9 @@ console.log(JSON.stringify(req.body));
     // recommend sending 401 status in production for non-validated signatures
     // res.sendStatus(401);
   }
-  console.log(req.body);
+  //console.log(req.body);
 
   // Process the Facebook updates here
-  res.sendStatus(200);
-});
-
-app.post('/instagram', function(req, res) {
-  console.log('Instagram request body:');
-  console.log(req.body);
-  // Process the Instagram updates here
   res.sendStatus(200);
 });
 

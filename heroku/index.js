@@ -34,15 +34,13 @@ app.get(['/facebook', '/instagram'], function(req, res) {
 });
 
 app.post('/facebook', function(req, res) {
-
+console.log(JSON.stringify(req.body));
   if (req.isXHub) {
     if (req.isXHubValid()) {
       if(req.body.object == 'page') {
         var entry = req.body.entry;
         entry.forEach(function(userEntry) {
-          console.log('inside userEntry foreach');
           entry.changes.forEach(function(change) {
-            console.log('inside changes foreach');
             var value = change.value;
             if(change.field == 'field' && value.item == 'like' && value.verb == 'add') {
               console.log('The user ' + value.user_id + ' has liked the page ' + change.id);

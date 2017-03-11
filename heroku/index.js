@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
   console.log(req);
-  res.send('It works!');
+  res.send('It works');
 });
 
 app.get(['/facebook'], function(req, res) {
@@ -60,7 +60,7 @@ app.post('/facebook', function(req, res) {
     // recommend sending 401 status in production for non-validated signatures
     // res.sendStatus(401);
   }
-
+  
   // Process the Facebook updates here
   res.sendStatus(200);
 });
